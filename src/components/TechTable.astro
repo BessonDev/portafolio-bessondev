@@ -1,0 +1,143 @@
+---
+// ============================================================
+// TECH TABLE — Stack tecnológico por categorías
+// Formato tabla: Categoría | Tecnologías | Nivel
+// Más efectivo que Bento Grid para perfiles de Ing. de Sistemas
+// ============================================================
+interface TechRow {
+  category: string;
+  icon: string;
+  technologies: string[];
+  level: 'Avanzado' | 'Senior' | 'Full-Stack' | 'Líder' | 'Intermedio';
+  levelColor: string;
+}
+
+const rows: TechRow[] = [
+  {
+    category: 'Infraestructura / SysAdmin',
+    icon: '🖥️',
+    technologies: ['Linux (Debian/Ubuntu)', 'Docker', 'Nextcloud', 'GLPI', 'Virtualización'],
+    level: 'Avanzado',
+    levelColor: '#10b981',
+  },
+  {
+    category: 'Redes y Seguridad',
+    icon: '🌐',
+    technologies: ['Cableado Estructurado', 'Access Points', 'Auditoría de Red', 'Seguridad Perimetral'],
+    level: 'Senior',
+    levelColor: '#3b82f6',
+  },
+  {
+    category: 'Desarrollo Backend',
+    icon: '⚙️',
+    technologies: ['PHP', 'Python', 'Flask', 'MySQL', 'SQLite', 'VBA / Macros Excel'],
+    level: 'Full-Stack',
+    levelColor: '#8b5cf6',
+  },
+  {
+    category: 'Desarrollo Frontend',
+    icon: '🎨',
+    technologies: ['JavaScript', 'HTML5', 'CSS3', 'Astro'],
+    level: 'Full-Stack',
+    levelColor: '#8b5cf6',
+  },
+  {
+    category: 'Gestión y Liderazgo',
+    icon: '📋',
+    technologies: ['Coordinación de equipos', 'Gestión de proyectos', 'ITIL', 'Capacitación técnica'],
+    level: 'Líder',
+    levelColor: '#f59e0b',
+  },
+];
+---
+
+<section id="stack" class="py-20">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- Encabezado -->
+    <div class="text-center mb-12 scroll-reveal">
+      <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: #3b82f6;">Stack Tecnológico</p>
+      <h2 class="text-3xl md:text-4xl font-bold" style="color: #f8fafc;">
+        Mi caja de herramientas
+      </h2>
+    </div>
+
+    <!-- Tabla (desktop) / Cards (mobile) -->
+    <!-- Desktop: tabla -->
+    <div class="hidden md:block scroll-reveal">
+      <div class="rounded-2xl overflow-hidden border" style="border-color: #1e293b;">
+        <table class="w-full text-sm">
+          <thead>
+            <tr style="background-color: #0f172a; border-bottom: 1px solid #1e293b;">
+              <th class="text-left px-6 py-4 font-semibold" style="color: #64748b;">Categoría</th>
+              <th class="text-left px-6 py-4 font-semibold" style="color: #64748b;">Tecnologías</th>
+              <th class="text-right px-6 py-4 font-semibold" style="color: #64748b;">Nivel</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr
+                style={`background-color: ${i % 2 === 0 ? '#0f172a' : '#0b1120'}; border-bottom: 1px solid #1e293b;`}
+              >
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <span class="text-lg">{row.icon}</span>
+                    <span class="font-medium" style="color: #f8fafc;">{row.category}</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex flex-wrap gap-1.5">
+                    {row.technologies.map((tech) => (
+                      <span
+                        class="px-2 py-0.5 rounded-md text-xs font-mono"
+                        style="background-color: #1e293b; color: #94a3b8;"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <span
+                    class="inline-flex px-3 py-1 rounded-full text-xs font-bold"
+                    style={`color: ${row.levelColor}; background-color: ${row.levelColor}15; border: 1px solid ${row.levelColor}30;`}
+                  >
+                    {row.level}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mobile: cards -->
+    <div class="md:hidden space-y-4">
+      {rows.map((row) => (
+        <div class="rounded-xl p-4 border scroll-reveal" style="background-color: #0f172a; border-color: #1e293b;">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">{row.icon}</span>
+              <span class="font-semibold text-sm" style="color: #f8fafc;">{row.category}</span>
+            </div>
+            <span
+              class="px-2 py-0.5 rounded-full text-xs font-bold"
+              style={`color: ${row.levelColor}; background-color: ${row.levelColor}15;`}
+            >
+              {row.level}
+            </span>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            {row.technologies.map((tech) => (
+              <span class="px-2 py-0.5 rounded-md text-xs font-mono" style="background-color: #1e293b; color: #94a3b8;">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

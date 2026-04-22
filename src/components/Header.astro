@@ -1,0 +1,79 @@
+---
+// ============================================================
+// HEADER — Navegación sticky con logo y mobile menu
+// Links: Sobre Mí, Experiencia, Proyectos, Contacto
+// Mobile: hamburger menu con slide-down animado
+// ============================================================
+import Button from './Button.astro';
+---
+
+<header
+  class="sticky top-0 z-50 border-b"
+  style="background-color: rgba(2, 6, 23, 0.85); backdrop-filter: blur(12px); border-color: #1e293b;"
+>
+  <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+
+    <!-- Logo / Nombre -->
+    <a href="#" class="font-mono text-sm font-medium" style="color: #3b82f6;">
+      bessondev<span style="color: #10b981;">.com</span>
+    </a>
+
+    <!-- Nav Desktop -->
+    <ul class="hidden md:flex items-center gap-8 text-sm" style="color: #cbd5e1;">
+      <li><a href="#sobre-mi" class="hover:text-white transition-colors">Sobre Mí</a></li>
+      <li><a href="#experiencia" class="hover:text-white transition-colors">Experiencia</a></li>
+      <li><a href="#proyectos" class="hover:text-white transition-colors">Proyectos</a></li>
+      <li><a href="#liderazgo" class="hover:text-white transition-colors">Liderazgo</a></li>
+      <li><a href="#contacto" class="hover:text-white transition-colors">Contacto</a></li>
+    </ul>
+
+    <!-- CTA Desktop -->
+    <div class="hidden md:block">
+      <Button href="/Harold_Besson_CV.pdf" variant="outline" target="_blank" rel="noopener noreferrer">
+        <!-- Icono descarga -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Descargar CV
+      </Button>
+    </div>
+
+    <!-- Hamburger Mobile -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden p-2 rounded-lg transition-colors"
+      style="color: #64748b;"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="6" x2="20" y2="6"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="18" x2="20" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu (oculto por defecto, controlado por JS en Layout) -->
+  <div
+    id="mobile-menu"
+    class="md:hidden overflow-hidden border-t"
+    style="max-height: 0; transition: max-height 0.3s ease-out; border-color: #1e293b;"
+  >
+    <ul class="px-6 py-4 space-y-4 text-sm" style="color: #cbd5e1;">
+      <li><a href="#sobre-mi" class="block hover:text-white transition-colors">Sobre Mí</a></li>
+      <li><a href="#experiencia" class="block hover:text-white transition-colors">Experiencia</a></li>
+      <li><a href="#proyectos" class="block hover:text-white transition-colors">Proyectos</a></li>
+      <li><a href="#liderazgo" class="block hover:text-white transition-colors">Liderazgo</a></li>
+      <li><a href="#contacto" class="block hover:text-white transition-colors">Contacto</a></li>
+      <li class="pt-2">
+        <Button href="/Harold_Besson_CV.pdf" variant="primary" target="_blank" rel="noopener noreferrer" class="w-full justify-center">
+          Descargar CV
+        </Button>
+      </li>
+    </ul>
+  </div>
+</header>

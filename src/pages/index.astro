@@ -1,0 +1,134 @@
+---
+// ============================================================
+// INDEX — Página principal del portafolio
+// Composición de secciones en orden estratégico:
+// Hero → Sobre Mí → Experiencia (Case Studies) → Stack → Proyectos → Liderazgo → Contacto
+// ============================================================
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import SobreMi from '../components/SobreMi.astro';
+import CaseStudy from '../components/CaseStudy.astro';
+import TechTable from '../components/TechTable.astro';
+import ProjectsGrid from '../components/ProjectsGrid.astro';
+import Leadership from '../components/Leadership.astro';
+import Footer from '../components/Footer.astro';
+
+const projects = [
+  {
+    title: "Memorial APP",
+    description: "Aplicacion para control de funerarias y gestión de afiliados.",
+    stack: ["Next.js", "SQLite", "TailwindCSS"],
+    link: "https://github.com/bessondev/memorial-app",
+    image: "/images/memorial-dash-shot.png",
+    demoUrl: "https://memorial.bessondev.com"
+  },
+  {
+    title: "Hotel Plan",
+    description: "Software de reservaciones de hotel con gestión de habitaciones y servicios.",
+    stack: ["Node.js", "SQLite", "TailwindCSS"],
+    link: "https://github.com/bessondev/hotel-local-app",
+    image: "/images/hotel-dash-shot.png",
+    demoUrl: "https://hotelplan.bessondev.com"
+  },
+  {
+    title: "Brillary Eccomerce",
+    description: "Eccomerce para la venta de productos de belleza.",
+    stack: ["Astro", "PostgreSQL", "TailwindCSS"],
+    link: "https://github.com/bessondev/brillary-eccomerce",
+    image: "/images/brillary-shot.png",
+    demoUrl: "https://www.brillary-shop.netlify.app",
+  }
+];
+
+---
+
+<Layout>
+  <Header />
+
+  <main>
+    <!-- 1. Hero: primera impresión -->
+    <Hero name="Harold Besson" title="Arquitecto de Infraestructura & Desarrollador de Software" 
+    pitch="Ingeniero de sistemas con experiencia en gestión estratégica de TI" />  
+    <!-- 2. Sobre Mí: contexto personal y diferenciadores -->
+
+    <section id="sobre-mi" class="py-20">
+      <div class="max-w-5xl mx-auto px-6">
+
+        <div class="mb-10 scroll-reveal">
+            <SobreMi />
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Experiencia: Casos de Éxito (formato Problema/Solución/Impacto) -->
+    <!-- Los dos proyectos más importantes con datos reales del INFO.md -->
+    <section id="experiencia" class="py-20">
+      <div class="max-w-5xl mx-auto px-6">
+
+        <div class="mb-10 scroll-reveal">
+          <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: #3b82f6;">Experiencia</p>
+          <h2 class="text-3xl md:text-4xl font-bold" style="color: #f8fafc;">Casos de Éxito</h2>
+          <p class="mt-3 text-sm" style="color: #64748b;">Click en cada caso para ver el detalle completo.</p>
+        </div>
+
+        <!-- Caso 1: Infraestructura -->
+        <div class="space-y-5">
+          <CaseStudy
+            title="Arquitectura de Servicios Centralizados y Soberanía de Datos"
+            category="Infraestructura"
+            problem="La organización operaba con sistemas fragmentados, alta dependencia de servicios externos costosos y una gestión de soporte reactiva sin métricas, lo que generaba cuellos de botella en la resolución de incidencias técnicas."
+            solution="Diseñé e implementé desde cero un ecosistema basado en contenedores Docker sobre servidores Linux. Desplegué GLPI para la transición de soporte informal a una mesa de ayuda profesional con trazabilidad total. Implementé Nextcloud para garantizar soberanía de datos y optimicé la conectividad con auditoría completa de red y puntos de acceso."
+            impact={[
+              "Reducción del 40% en el tiempo promedio de resolución de tickets de soporte",
+              "Centralización del 100% de la documentación técnica organizacional",
+              "Ahorro mensual significativo en licencias de almacenamiento en la nube",
+              "Disponibilidad de infraestructura del 99.9% mediante aislamiento en Docker",
+            ]}
+            tags={["Linux", "Docker", "GLPI", "Nextcloud", "Redes Estructuradas", "Access Points"]}
+            image="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+            gallery={[
+              "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400&q=80",
+              "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80",
+              "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80",
+            ]}
+          />
+
+          <!-- Caso 2: Plataforma Educativa -->
+          <CaseStudy
+            title="Plataforma Integral de Gestión Académica y Control de Facilitadores"
+            category="Desarrollo Full-Stack"
+            problem="La gestión de inscripciones, asignación de docentes y seguimiento de historial académico se realizaba de forma manual o mediante herramientas no integradas, lo que provocaba errores en la data y lentitud en los procesos administrativos."
+            solution="Desarrollé una plataforma web a medida que centraliza el ciclo de vida educativo: Módulo Admin con control total de la oferta académica, gestión de facilitadores y reportería de ingresos. Módulo de Inscripción con interfaz intuitiva y validación de datos en tiempo real. Arquitectura de base de datos relacional optimizada en MySQL."
+            impact={[
+              "Automatización total del proceso de inscripción, reduciendo el trabajo manual en un 60%",
+              "Acceso instantáneo a reportes de rendimiento y asistencia para coordinadores",
+              "Interfaz responsiva que permite inscribirse desde cualquier dispositivo móvil",
+              "Eliminación de errores de data causados por duplicación manual",
+            ]}
+            tags={["PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "Full-Stack"]}
+            image="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"
+            gallery={[
+              "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&q=80",
+              "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&q=80",
+              "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=400&q=80",
+            ]}
+          />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. Stack Tecnológico -->
+    <TechTable />
+
+    <!-- 5. Proyectos de Código -->
+    <ProjectsGrid projects={projects} /> 
+    
+    <!-- 6. Liderazgo y Mentoría (diferenciador) -->
+    <Leadership />
+  </main>
+
+  <!-- 7. Footer + Contacto -->
+  <Footer />
+</Layout>

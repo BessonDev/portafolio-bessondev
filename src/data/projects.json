@@ -1,0 +1,26 @@
+[
+  {
+    "id": "smart-delivery",
+    "title": "Smart Delivery System",
+    "description": "Web de pedidos con integración automática a WhatsApp para gestión de entregas.",
+    "stack": ["Astro", "Tailwind", "WhatsApp API"],
+    "repo": "#",
+    "demo": "#"
+  },
+  {
+    "id": "inventory-suite",
+    "title": "Inventory Business Suite",
+    "description": "Sistema de gestión de inventarios desarrollado con Python, Flask y SQLite.",
+    "stack": ["Python", "Flask", "SQLite"],
+    "repo": "#",
+    "demo": "#"
+  },
+  {
+    "id": "productivity-tools",
+    "title": "Productividad Ágil",
+    "description": "Automatización de personal mediante macros avanzados en Excel (VBA).",
+    "stack": ["Excel", "VBA"],
+    "repo": "#",
+    "demo": "#"
+  }
+]

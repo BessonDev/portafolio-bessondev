@@ -1,0 +1,58 @@
+---
+// ============================================================
+// PROJECTS GRID — Sección con grid de ProjectCards
+// Los datos de proyectos están hardcodeados aquí (más simple que
+// Content Collections para 4-5 proyectos)
+// ============================================================
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section id="proyectos" class="py-20">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <!-- Encabezado -->
+    <div class="mb-12 scroll-reveal">
+      <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: #3b82f6;">Proyectos de Código</p>
+      <h2 class="text-3xl md:text-4xl font-bold" style="color: #f8fafc;">The Dev Lab</h2>
+      <p class="mt-3 text-sm" style="color: #64748b;">Proyectos construidos desde cero — de la idea al deploy.</p>
+    </div>
+
+    <!-- Grid de proyectos -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <ProjectCard
+        title="Plataforma de Gestión Educativa"
+        description="Sistema integral para gestión de inscripciones y facilitadores. Módulo admin, historial académico y reportería. Interfaz responsiva para inscripción desde móvil."
+        stack={["PHP", "MySQL", "JavaScript", "HTML/CSS"]}
+        category="Full-Stack"
+        githubUrl="https://github.com/HaroldBesson"
+      />
+
+      <ProjectCard
+        title="Sistema de Inventario Web"
+        description="Gestión de inventario con control de stock en tiempo real. Digitalización de procesos manuales con interfaz web ligera y rápida."
+        stack={["Python", "Flask", "SQLite", "HTML/CSS"]}
+        category="Backend + Web"
+        githubUrl="https://github.com/HaroldBesson"
+      />
+
+      <ProjectCard
+        title="Automatización de Personal"
+        description="Sistema de control de personal e inventarios complejos con lógica avanzada. Solución rápida y robusta para entornos donde la agilidad es prioridad."
+        stack={["Excel", "VBA", "Macros"]}
+        category="Automatización"
+        githubUrl="https://github.com/HaroldBesson"
+      />
+
+      <ProjectCard
+        title="Sistema de Ventas Web"
+        description="Plataforma de ventas con entorno web completo. Gestión de productos, clientes y transacciones con reportes integrados."
+        stack={["PHP", "MySQL", "JavaScript"]}
+        category="Full-Stack"
+        githubUrl="https://github.com/HaroldBesson"
+      />
+
+    </div>
+
+  </div>
+</section>

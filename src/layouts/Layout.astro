@@ -1,0 +1,181 @@
+---
+// ============================================================
+// LAYOUT PRINCIPAL — envuelve todas las páginas
+// Contiene: SEO meta tags, fonts, View Transitions, scripts JS
+// ============================================================
+import { ClientRouter } from 'astro:transitions';
+
+// Fuentes self-hosted para mejor performance (no Google Fonts)
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/jetbrains-mono/400.css';
+
+// Estilos globales (design tokens + Tailwind + animaciones)
+import '../styles/global.css';
+
+interface Props {
+  title?: string;       // Título de la pestaña del browser
+  description?: string; // Meta description para SEO
+  ogImage?: string;     // Imagen para compartir en redes sociales
+}
+
+const {
+  title = 'Ing. Harold Besson | Infraestructura & Dev Full-Stack',
+  description = 'Ingeniero de Sistemas especializado en infraestructura crítica, coordinación de TI y desarrollo de software full-stack. Linux, Docker, Nextcloud, PHP, Python.',
+  ogImage = '/og-image.png',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Harold Besson" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- OpenGraph (para LinkedIn, WhatsApp, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD Structured Data (para Google) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Harold Besson",
+      "jobTitle": "Ingeniero de Sistemas",
+      "description": description,
+      "url": "https://haroldbesson.dev",
+      "sameAs": [
+        "https://github.com/HaroldBesson",
+        "https://linkedin.com/in/haroldbesson"
+      ]
+    })} />
+
+    <!-- View Transitions (animaciones entre páginas de Astro) -->
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen" style="background-color: #020617;">
+    <!-- Contenido de la página (inyectado por cada .astro) -->
+    <slot />
+
+    <!-- ============================================================
+         SCRIPTS GLOBALES (inline para ejecución inmediata)
+         Consolidados aquí para evitar conflictos de bundling
+         ============================================================ -->
+    <script is:inline>
+      // ---- Scroll Reveal ----------------------------------------
+      // Observa elementos con .scroll-reveal y les agrega .revealed
+      // cuando entran al viewport
+      const scrollObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              scrollObserver.unobserve(entry.target); // solo una vez
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      function initScrollReveal() {
+        document.querySelectorAll('.scroll-reveal').forEach((el) =>
+          scrollObserver.observe(el)
+        );
+      }
+
+      // ---- Case Study Toggle ------------------------------------
+      // Expand/collapse de los casos de estudio
+      // Usa event listeners directos (no delegation) para evitar bugs
+      function initCaseStudyToggles() {
+        document.querySelectorAll('.case-study-header').forEach((header) => {
+          // Clonar para remover listeners anteriores (importante en View Transitions)
+          const newHeader = header.cloneNode(true);
+          header.parentNode.replaceChild(newHeader, header);
+
+          newHeader.addEventListener('click', () => {
+            const card = newHeader.closest('.case-study-card');
+            if (!card) return;
+
+            const content = card.querySelector('.content');
+            const chevron = newHeader.querySelector('.chevron');
+            const isExpanded = newHeader.dataset.expanded === 'true';
+
+            if (isExpanded) {
+              newHeader.dataset.expanded = 'false';
+              content.style.gridTemplateRows = '0fr';
+              chevron.style.transform = 'rotate(0deg)';
+            } else {
+              newHeader.dataset.expanded = 'true';
+              content.style.gridTemplateRows = '1fr';
+              chevron.style.transform = 'rotate(180deg)';
+            }
+          });
+        });
+      }
+
+      // ---- Mobile Menu ------------------------------------------
+      function initMobileMenu() {
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (!btn || !menu) return;
+
+        btn.addEventListener('click', () => {
+          const isOpen = menu.classList.contains('open');
+          if (isOpen) {
+            menu.classList.remove('open');
+            menu.style.maxHeight = '0';
+            btn.setAttribute('aria-expanded', 'false');
+          } else {
+            menu.classList.add('open');
+            menu.style.maxHeight = menu.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+
+        // Auto-cerrar al clickear un link del menú
+        menu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            menu.classList.remove('open');
+            menu.style.maxHeight = '0';
+            btn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // ---- Init en carga inicial --------------------------------
+      initScrollReveal();
+      initCaseStudyToggles();
+      initMobileMenu();
+
+      // ---- Re-init después de View Transitions ------------------
+      // View Transitions hace swap del DOM, entonces hay que re-registrar
+      document.addEventListener('astro:after-swap', () => {
+        initScrollReveal();
+        initCaseStudyToggles();
+        initMobileMenu();
+      });
+    </script>
+  </body>
+</html>

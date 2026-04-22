@@ -1,0 +1,25 @@
+---
+// ============================================================
+// TAG — Etiqueta de categoría/tecnología
+// Variantes: blue (default), emerald, violet, slate
+// Uso: <Tag label="Docker" variant="blue" />
+// ============================================================
+interface Props {
+  label: string;
+  variant?: 'blue' | 'emerald' | 'violet' | 'slate';
+}
+
+const { label, variant = 'blue' } = Astro.props;
+
+// Mapa de clases por variante
+const styles: Record<string, string> = {
+  blue:    'bg-blue-500/10 text-blue-400 border-blue-500/20',
+  emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+  violet:  'bg-violet-500/10 text-violet-400 border-violet-500/20',
+  slate:   'bg-slate-700/50 text-slate-400 border-slate-600/30',
+};
+---
+
+<span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${styles[variant]}`}>
+  {label}
+</span>

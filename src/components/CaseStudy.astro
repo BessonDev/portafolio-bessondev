@@ -1,0 +1,152 @@
+---
+// ============================================================
+// CASE STUDY — Tarjeta expandible de caso de éxito
+// Props: title, category, problem, solution, impact[], tags[]
+//        image (URL imagen principal), gallery (URLs de evidencia)
+// El toggle expand/collapse está manejado en Layout.astro
+// ============================================================
+import Tag from './Tag.astro';
+
+interface Props {
+  title: string;
+  category: string;
+  problem: string;
+  solution: string;
+  impact: string[];
+  tags: string[];
+  image?: string;       // Imagen principal (hero del caso)
+  gallery?: string[];   // Galería de evidencia (máx 3-4 imágenes)
+}
+
+const { title, category, problem, solution, impact, tags, image, gallery = [] } = Astro.props;
+---
+
+<div class="case-study-card rounded-2xl overflow-hidden border" style="background-color: #0f172a; border-color: #1e293b;">
+
+  <!-- ---- Header (siempre visible, clickeable) ---- -->
+  <div
+    class="case-study-header px-6 py-5 cursor-pointer transition-colors"
+    data-expanded="false"
+    style="transition: background-color 0.15s;"
+    onmouseover="this.style.backgroundColor='#1e293b'"
+    onmouseout="this.style.backgroundColor=''"
+  >
+    <div class="flex items-center gap-4">
+
+      <!-- Thumbnail (visible siempre que haya imagen) -->
+      {image && (
+        <div class="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden" style="background-color: #1e293b;">
+          <img src={image} alt="" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      )}
+
+      <!-- Título y categoría -->
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-3 mb-1.5">
+          <Tag label={category} variant="violet" />
+        </div>
+        <h3 class="text-base md:text-lg font-semibold truncate" style="color: #f8fafc;">{title}</h3>
+      </div>
+
+      <!-- Chevron (rota al expandir) -->
+      <div class="flex-shrink-0 ml-2">
+        <svg
+          class="w-5 h-5 chevron"
+          style="color: #64748b; transform: rotate(0deg); transition: transform 0.3s ease;"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- Contenido expandible ---- -->
+  <!-- grid-rows trick: 0fr = colapsado, 1fr = expandido -->
+  <div
+    class="content"
+    style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-out;"
+  >
+    <div class="overflow-hidden">
+
+      <!-- Imagen principal (aparece al expandir) -->
+      {image && (
+        <div class="px-6 pt-5">
+          <div class="rounded-xl overflow-hidden" style="background-color: #1e293b; aspect-ratio: 16/7;">
+            <img src={image} alt={title} class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      )}
+
+      <!-- Cuerpo del caso de estudio -->
+      <div class="px-6 pb-6 pt-5 space-y-5 border-t" style="border-color: #1e293b; margin-top: 1.25rem;">
+
+        <!-- Problema -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest mb-2" style="color: #3b82f6;">
+            El Problema
+          </h4>
+          <p class="text-sm leading-relaxed" style="color: #cbd5e1;">{problem}</p>
+        </div>
+
+        <!-- Solución -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest mb-2" style="color: #10b981;">
+            La Solución
+          </h4>
+          <p class="text-sm leading-relaxed" style="color: #cbd5e1;">{solution}</p>
+        </div>
+
+        <!-- Impacto (lista de bullets) -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest mb-2" style="color: #8b5cf6;">
+            El Impacto
+          </h4>
+          <ul class="space-y-1.5">
+            {impact.map((item) => (
+              <li class="flex items-start gap-2 text-sm" style="color: #cbd5e1;">
+                <span class="mt-1 flex-shrink-0 w-1.5 h-1.5 rounded-full" style="background-color: #10b981;"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Galería de evidencia -->
+        {gallery.length > 0 && (
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-widest mb-3" style="color: #64748b;">
+              Evidencia
+            </h4>
+            <div class="grid grid-cols-3 gap-2">
+              {gallery.map((img, i) => (
+                <div class="rounded-lg overflow-hidden" style="background-color: #1e293b; aspect-ratio: 1;">
+                  <img
+                    src={img}
+                    alt={`Evidencia ${i + 1}`}
+                    class="w-full h-full object-cover"
+                    style="transition: transform 0.2s; cursor: pointer;"
+                    loading="lazy"
+                    onmouseover="this.style.transform='scale(1.05)'"
+                    onmouseout="this.style.transform='scale(1)'"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Tags de tecnologías -->
+        <div class="flex flex-wrap gap-2 pt-2">
+          {tags.map((tag) => (
+            <Tag label={tag} variant="slate" />
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

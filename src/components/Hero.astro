@@ -1,0 +1,45 @@
+---
+interface Props {
+  name: string;
+  title: string;
+  pitch: string;
+}
+
+const { name, title, pitch } = Astro.props;
+---
+
+<section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+  <!-- Background Glow -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
+    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-emerald-600/20 blur-[120px] rounded-full"></div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium mb-6 scroll-reveal">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+      </span>
+      Disponible para nuevos desafíos
+    </div>
+    
+    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight scroll-reveal">
+      Hola, soy <span class="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">{name}</span>
+    </h1>
+    
+    <p class="text-xl md:text-2xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed scroll-reveal">
+      {title} <br/>
+      <span class="text-lg md:text-xl opacity-80">{pitch}</span>
+    </p>
+    
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 scroll-reveal">
+      <a href="#experiencia" class="px-6 py-2 rounded-lg font-medium transition-all duration-200 bg-blue-600 text-white hover:bg-blue-700">
+        Ver mi trabajo
+      </a>
+      <a href="#contacto" class="px-6 py-2 rounded-lg font-medium transition-all duration-200 bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700">
+        Contacto
+      </a>
+    </div>
+  </div>
+</section>
