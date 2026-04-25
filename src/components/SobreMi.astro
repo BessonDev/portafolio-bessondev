@@ -2,12 +2,12 @@
 import profile from '../data/profile.json';
 ---
 
-<section class="section-padding">
-  <div class="container">
+<section class="py-20">
+  <div class="max-w-5xl mx-auto px-6">
     <!-- Section header -->
     <div class="mb-12">
-      <span class="text-accent-primary font-mono text-sm">01</span>
-      <h2 class="font-heading text-3xl md:text-4xl font-bold mt-2">Sobre mí</h2>
+      <span class="text-blue-500 font-mono text-sm">01</span>
+      <h2 class="text-3xl md:text-4xl font-bold mt-2 text-white">Sobre mí</h2>
     </div>
 
     <!-- Profile and intro -->
@@ -15,14 +15,14 @@ import profile from '../data/profile.json';
       <!-- Profile Image -->
       <div class="flex justify-center md:justify-start">
         <div class="relative">
-          <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-border-subtle">
+          <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-slate-700">
             <img
               src="/images/profile.webp"
               alt="Foto de perfil"
               class="w-full h-full object-cover"
             />
           </div>
-          <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-accent-primary flex items-center justify-center">
+          <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center">
             <span class="text-white font-bold text-lg">HB</span>
           </div>
         </div>
@@ -30,10 +30,10 @@ import profile from '../data/profile.json';
 
       <!-- Text content -->
       <div class="space-y-6">
-        <p class="text-text-secondary text-lg leading-relaxed">
+        <p class="text-slate-300 text-lg leading-relaxed">
           {profile.about}
         </p>
-        <p class="text-text-secondary leading-relaxed">
+        <p class="text-slate-300 leading-relaxed">
           Como Coordinador de TI, mi rol va más allá de la gestión tradicional: me enfoco en el <strong>desarrollo de capacidades internas</strong> y la <strong>formación de equipos de alto rendimiento</strong>. <br>
           Mi combinación única de estrategia, ejecución técnica y liderazgo me permite transformar la infraestructura y el código en activos de alto valor.
         </p>
@@ -42,21 +42,21 @@ import profile from '../data/profile.json';
 
     <!-- Stats/Highlights -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="card text-center">
-        <div class="text-accent-primary font-heading text-3xl font-bold mb-1">+3</div>
-        <div class="text-text-secondary text-xs">Años como Coordinador de TI</div>
+      <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 text-center">
+        <div class="text-blue-500 text-3xl font-bold mb-1">+3</div>
+        <div class="text-slate-500 text-xs">Años como Coordinador de TI</div>
       </div>
-      <div class="card text-center">
-        <div class="text-accent-secondary font-heading text-3xl font-bold mb-1">+10</div>
-        <div class="text-text-secondary text-xs">Proyectos desplegados</div>
+      <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 text-center">
+        <div class="text-emerald-500 text-3xl font-bold mb-1">+10</div>
+        <div class="text-slate-500 text-xs">Proyectos desplegados</div>
       </div>
-      <div class="card text-center">
-        <div class="text-accent-primary font-heading text-3xl font-bold mb-1">3</div>
-        <div class="text-text-secondary text-xs">Proyectos en desarrollo</div>
+      <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 text-center">
+        <div class="text-blue-500 text-3xl font-bold mb-1">3</div>
+        <div class="text-slate-500 text-xs">Proyectos en desarrollo</div>
       </div>
-      <div class="card text-center">
-        <div class="text-accent-secondary font-heading text-3xl font-bold mb-1">+200</div>
-        <div class="text-text-secondary text-xs">Personas capacitadas en talleres y ponencias</div>
+      <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 text-center">
+        <div class="text-emerald-500 text-3xl font-bold mb-1">+200</div>
+        <div class="text-slate-500 text-xs">Personas capacitadas en talleres y ponencias</div>
       </div>
     </div>
   </div>
