@@ -25,31 +25,31 @@ const { title, category, problem, solution, impact, tags, image, gallery = [] } 
 
   <!-- ---- Header (siempre visible, clickeable) ---- -->
   <div
-    class="case-study-header px-6 py-5 cursor-pointer transition-colors"
+    class="case-study-header px-4 py-4 md:px-6 md:py-5 cursor-pointer transition-colors"
     data-expanded="false"
     style="transition: background-color 0.15s;"
     onmouseover="this.style.backgroundColor='#1e293b'"
     onmouseout="this.style.backgroundColor=''"
   >
-    <div class="flex items-center gap-4">
+    <div class="flex items-start gap-3 md:gap-4">
 
       <!-- Thumbnail (visible siempre que haya imagen) -->
       {image && (
-        <div class="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden" style="background-color: #1e293b;">
+        <div class="flex-shrink-0 w-16 h-16 md:w-16 md:h-16 rounded-xl overflow-hidden" style="background-color: #1e293b;">
           <img src={image} alt="" class="w-full h-full object-cover" loading="lazy" />
         </div>
       )}
 
       <!-- Título y categoría -->
       <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-3 mb-1.5">
+        <div class="flex items-center gap-2 md:gap-3 mb-1">
           <Tag label={category} variant="violet" />
         </div>
-        <h3 class="text-base md:text-lg font-semibold truncate" style="color: #f8fafc;">{title}</h3>
+        <h3 class="text-sm md:text-base font-semibold" style="color: #f8fafc; line-height: 1.3;">{title}</h3>
       </div>
 
       <!-- Chevron (rota al expandir) -->
-      <div class="flex-shrink-0 ml-2">
+      <div class="flex-shrink-0 ml-1 md:ml-2">
         <svg
           class="w-5 h-5 chevron"
           style="color: #64748b; transform: rotate(0deg); transition: transform 0.3s ease;"
@@ -67,7 +67,7 @@ const { title, category, problem, solution, impact, tags, image, gallery = [] } 
   <!-- grid-rows trick: 0fr = colapsado, 1fr = expandido -->
   <div
     class="content"
-    style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-out;"
+    style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s ease-out;"
   >
     <div class="overflow-hidden">
 
