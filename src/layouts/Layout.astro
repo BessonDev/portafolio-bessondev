@@ -5,13 +5,9 @@
 // ============================================================
 import { ClientRouter } from 'astro:transitions';
 
-// Fuentes self-hosted para mejor performance (no Google Fonts)
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
-import '@fontsource/inter/800.css';
-import '@fontsource/jetbrains-mono/400.css';
+// Fuentes desde Google Fonts (más liviano que @fontsource - solo subset latin)
+// Inter: 400,500,600,700,800 | JetBrains Mono: 400
+const fontCss = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400&display=swap`;
 
 // Estilos globales (design tokens + Tailwind + animaciones)
 import '../styles/global.css';
@@ -24,7 +20,7 @@ interface Props {
 
 const {
   title = 'Ing. Harold Besson | Infraestructura & Dev Full-Stack',
-  description = 'Ingeniero de Sistemas especializado en infraestructura crítica, coordinación de TI y desarrollo de software full-stack. Linux, Docker, Nextcloud, PHP, Python.',
+  description = 'Ingeniero de sistemas con experiencia en gestión estratégica de TI, implementación de infraestructura robusta y desarrollo full-stack.',
   ogImage = '/images/og-image.webp',
 } = Astro.props;
 ---
@@ -57,6 +53,11 @@ const {
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts (CDN con subset automático para mejor performance) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href={fontCss} rel="stylesheet" />
 
     <!-- JSON-LD Structured Data (para Google) -->
     <script type="application/ld+json" set:html={JSON.stringify({
