@@ -64,10 +64,10 @@ const { title, category, problem, solution, impact, tags, image, gallery = [] } 
   </div>
 
   <!-- ---- Contenido expandible ---- -->
-  <!-- grid-rows trick: 0fr = colapsado, 1fr = expandido -->
+  <!-- max-height trick: 0 = colapsado, 9999px = expandido (más rápido que grid-template-rows en mobile) -->
   <div
     class="content"
-    style="display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s ease-out;"
+    style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out;"
   >
     <div class="overflow-hidden">
 

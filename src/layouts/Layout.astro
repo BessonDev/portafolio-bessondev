@@ -125,11 +125,11 @@ const {
 
             if (isExpanded) {
               newHeader.dataset.expanded = 'false';
-              content.style.gridTemplateRows = '0fr';
+              content.style.maxHeight = '0';
               chevron.style.transform = 'rotate(0deg)';
             } else {
               newHeader.dataset.expanded = 'true';
-              content.style.gridTemplateRows = '1fr';
+              content.style.maxHeight = content.scrollHeight + 'px';
               chevron.style.transform = 'rotate(180deg)';
             }
           });
