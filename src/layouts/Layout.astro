@@ -154,12 +154,15 @@ const {
           }
         });
 
-        // Auto-cerrar al clickear un link del menú
+        // Auto-cerrar al clickear un link del menú (con delay para que funcione el scroll)
         menu.querySelectorAll('a').forEach((link) => {
           link.addEventListener('click', () => {
-            menu.classList.remove('open');
-            menu.style.maxHeight = '0';
-            btn.setAttribute('aria-expanded', 'false');
+            // Delay para que el scroll hacia el anchor funcione primero
+            setTimeout(() => {
+              menu.classList.remove('open');
+              menu.style.maxHeight = '0';
+              btn.setAttribute('aria-expanded', 'false');
+            }, 100);
           });
         });
       }

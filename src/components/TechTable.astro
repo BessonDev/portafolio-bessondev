@@ -1,50 +1,77 @@
 ---
 // ============================================================
 // TECH TABLE — Stack tecnológico por categorías
-// Formato tabla: Categoría | Tecnologías | Nivel
-// Más efectivo que Bento Grid para perfiles de Ing. de Sistemas
+// Formato tabla: Categoría | Tecnologías
 // ============================================================
 interface TechRow {
   category: string;
   icon: string;
   technologies: string[];
-  level: 'Avanzado' | 'Senior' | 'Full-Stack' | 'Líder' | 'Intermedio';
-  levelColor: string;
+}
+
+// Mapeo de tecnologías: [nombreDevicon, tieneVersionPlain]
+const techMap: Record<string, [string, boolean]> = {
+  'HTML5': ['html5', true],
+  'HTML': ['html5', true],
+  'CSS3': ['css3', true],
+  'CSS': ['css3', true],
+  'JavaScript': ['javascript', true],
+  'JS': ['javascript', true],
+  'TypeScript': ['typescript', true],
+  'TS': ['typescript', true],
+  'Python': ['python', true],
+  'Flask': ['flask', false],
+  'Django': ['django', true],
+  'PHP': ['php', true],
+  'MySQL': ['mysql', true],
+  'SQLite': ['sqlite', true],
+  'PostgreSQL': ['postgresql', true],
+  'Postgres': ['postgresql', true],
+  'Astro': ['astro', true],
+  'React': ['react', true],
+  'Vue': ['vue', true],
+  'Next.js': ['nextjs', true],
+  'TailwindCSS': ['tailwindcss', false],
+  'Tailwind': ['tailwindcss', false],
+  'Bootstrap': ['bootstrap', true],
+  'Laravel': ['laravel', true],
+  'Node.js': ['nodejs', true],
+  'Node': ['nodejs', true],
+  'Linux': ['linux', true],
+  'Docker': ['docker', true],
+};
+
+// Función para obtener el icono de Devicon (versión original con colores)
+function getDeviconUrl(tech: string): string {
+  const mapped = techMap[tech];
+  if (!mapped) {
+    return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.toLowerCase()}/${tech.toLowerCase()}-original.svg`;
+  }
+  const [iconName, hasPlain] = mapped;
+  const version = hasPlain ? 'original' : 'original';
+  return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName}/${iconName}-${version}.svg`;
 }
 
 const rows: TechRow[] = [
   {
-    category: 'Administración de Sistemas',
-    icon: '🖥️',
-    technologies: ['Windows', 'Linux', 'Docker', 'Nextcloud', 'GLPI', 'RustDesk'],
-    level: 'Avanzado',
-    levelColor: '#10b981',
-  },
-  {
-    category: 'Redes y Seguridad',
-    icon: '🌐',
-    technologies: ['Cableado Estructurado', 'Access Points', 'Auditoría de Red', 'Sistemas CCTV', 'Servidores', 'VPN', 'DNS', 'Gestion Remota'],
-    level: 'Senior',
-    levelColor: '#3b82f6',
-  },
-  {
     category: 'Desarrollo Backend',
     icon: '⚙️',
-    technologies: ['Python', 'PHP', 'Flask', 'MySQL', 'SQLite', 'VBA / Macros Excel'],
-    level: 'Full-Stack',
-    levelColor: '#8b5cf6',
+    technologies: ['Python', 'PHP', 'MySQL', 'SQLite', 'PostgreSQL', 'Node.js', 'Next.js'],
   },
   {
     category: 'Desarrollo Frontend',
     icon: '🎨',
     technologies: ['JavaScript', 'HTML5', 'CSS3', 'Astro', 'TailwindCSS', 'Bootstrap', 'React'],
-    level: 'Full-Stack',
-    levelColor: '#8b5cf6',
+  },
+  {
+    category: 'Infraestructura',
+    icon: '🖥️',
+    technologies: ['Linux', 'Docker'],
   },
 ];
 ---
 
-<section id="stack" class="py-20">
+<section id="stack" class="py-12 md:py-16">
   <div class="max-w-5xl mx-auto px-6">
 
     <!-- Encabezado -->
@@ -55,8 +82,7 @@ const rows: TechRow[] = [
       </h2>
     </div>
 
-    <!-- Tabla (desktop) / Cards (mobile) -->
-    <!-- Desktop: tabla -->
+    <!-- Tabla (desktop) -->
     <div class="hidden md:block scroll-reveal">
       <div class="rounded-2xl overflow-hidden border" style="border-color: #1e293b;">
         <table class="w-full text-sm">
@@ -64,7 +90,6 @@ const rows: TechRow[] = [
             <tr style="background-color: #0f172a; border-bottom: 1px solid #1e293b;">
               <th class="text-left px-6 py-4 font-semibold" style="color: #64748b;">Categoría</th>
               <th class="text-left px-6 py-4 font-semibold" style="color: #64748b;">Tecnologías</th>
-              <th class="text-right px-6 py-4 font-semibold" style="color: #64748b;">Nivel</th>
             </tr>
           </thead>
           <tbody>
@@ -79,24 +104,23 @@ const rows: TechRow[] = [
                   </div>
                 </td>
                 <td class="px-6 py-4">
-                  <div class="flex flex-wrap gap-1.5">
+                  <div class="flex flex-wrap gap-3">
                     {row.technologies.map((tech) => (
-                      <span
-                        class="px-2 py-0.5 rounded-md text-xs font-mono"
-                        style="background-color: #1e293b; color: #94a3b8;"
+                      <div 
+                        class="flex items-center gap-2 px-3 py-1.5 rounded-full border"
+                        style="background-color: #1e293b; border-color: #334155;"
+                        title={tech}
                       >
-                        {tech}
-                      </span>
+                        <img 
+                          src={getDeviconUrl(tech)} 
+                          alt={tech}
+                          class="w-5 h-5 object-contain"
+                          loading="lazy"
+                        />
+                        <span class="text-xs text-slate-300 font-medium">{tech}</span>
+                      </div>
                     ))}
                   </div>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <span
-                    class="inline-flex px-3 py-1 rounded-full text-xs font-bold"
-                    style={`color: ${row.levelColor}; background-color: ${row.levelColor}15; border: 1px solid ${row.levelColor}30;`}
-                  >
-                    {row.level}
-                  </span>
                 </td>
               </tr>
             ))}
@@ -107,25 +131,30 @@ const rows: TechRow[] = [
 
     <!-- Mobile: cards -->
     <div class="md:hidden space-y-4">
-      {rows.map((row) => (
-        <div class="rounded-xl p-4 border scroll-reveal" style="background-color: #0f172a; border-color: #1e293b;">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <span class="text-lg">{row.icon}</span>
-              <span class="font-semibold text-sm" style="color: #f8fafc;">{row.category}</span>
-            </div>
-            <span
-              class="px-2 py-0.5 rounded-full text-xs font-bold"
-              style={`color: ${row.levelColor}; background-color: ${row.levelColor}15;`}
-            >
-              {row.level}
-            </span>
+      {rows.map((row, i) => (
+        <div 
+          class="rounded-xl p-4 border scroll-reveal" 
+          style={`background-color: ${i % 2 === 0 ? '#0f172a' : '#0b1120'}; border-color: #1e293b;`}
+        >
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-lg">{row.icon}</span>
+            <span class="font-semibold text-sm" style="color: #f8fafc;">{row.category}</span>
           </div>
-          <div class="flex flex-wrap gap-1.5">
+          <div class="flex flex-wrap gap-2">
             {row.technologies.map((tech) => (
-              <span class="px-2 py-0.5 rounded-md text-xs font-mono" style="background-color: #1e293b; color: #94a3b8;">
-                {tech}
-              </span>
+              <div 
+                class="flex items-center gap-2 px-3 py-1.5 rounded-full border"
+                style="background-color: #1e293b; border-color: #334155;"
+                title={tech}
+              >
+                <img 
+                  src={getDeviconUrl(tech)} 
+                  alt={tech}
+                  class="w-5 h-5 object-contain"
+                  loading="lazy"
+                />
+                <span class="text-xs text-slate-300 font-medium">{tech}</span>
+              </div>
             ))}
           </div>
         </div>

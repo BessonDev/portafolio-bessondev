@@ -31,6 +31,25 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scroll padding para secciones con anchors (compensa header fijo) */
+section[id] {
+  scroll-margin-top: 120px;
+}
+
+footer[id] {
+  scroll-margin-top: 120px;
+}
+
+/* Mobile: mayor offset para header más alto */
+@media (max-width: 768px) {
+  section[id] {
+    scroll-margin-top: 140px;
+  }
+  footer[id] {
+    scroll-margin-top: 140px;
+  }
+}
+
 body {
   background-color: #020617;
   color: #f8fafc;
