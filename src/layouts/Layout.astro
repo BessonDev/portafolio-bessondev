@@ -22,6 +22,7 @@ const {
   title = 'Ing. Harold Besson | Infraestructura & Dev Full-Stack',
   description = 'Ingeniero de sistemas con experiencia en gestión estratégica de TI, implementación de infraestructura robusta y desarrollo full-stack.',
   ogImage = '/images/og-image.webp',
+  url = 'https://bessondev.com',
 } = Astro.props;
 ---
 
@@ -38,11 +39,13 @@ const {
     <meta name="author" content="Harold Besson" />
     <meta name="robots" content="index, follow" />
 
-    <!-- OpenGraph (para LinkedIn, WhatsApp, etc.) -->
+    <!-- OpenGraph (para LinkedIn, WhatsApp, Facebook) -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Harold Besson" />
     <meta property="og:locale" content="es_ES" />
 
     <!-- Twitter Card -->
