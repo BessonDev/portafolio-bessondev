@@ -4,75 +4,83 @@
 // Composición de secciones en orden estratégico:
 // Hero → Sobre Mí → Experiencia (Case Studies) → Stack → Proyectos → Liderazgo → Contacto
 // ============================================================
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import SobreMi from '../components/SobreMi.astro';
-import CaseStudy from '../components/CaseStudy.astro';
-import TechTable from '../components/TechTable.astro';
-import ProjectsGrid from '../components/ProjectsGrid.astro';
-import Leadership from '../components/Leadership.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import SobreMi from "../components/SobreMi.astro";
+import CaseStudy from "../components/CaseStudy.astro";
+import TechTable from "../components/TechTable.astro";
+import ProjectsGrid from "../components/ProjectsGrid.astro";
+import Leadership from "../components/Leadership.astro";
+import Footer from "../components/Footer.astro";
 
 const projects = [
-    {
-    title: "Sistema de Pedidos Web 📲",  
-    description: "Menu interactivo web para restaurantes, con sistema de carrito de compras, pedidos via whatsapp y precios a la tasa del dia.",
+  {
+    title: "Sistema de Pedidos Web 📲",
+    description:
+      "Menu interactivo web para restaurantes, con sistema de carrito de compras, pedidos via whatsapp y precios a la tasa del dia.",
     stack: ["Astro", "TailwindCSS", "HTML", "CSS"],
     link: "https://github.com/bessondev/empanadas-elgordito",
     image: "/images/empanadas2.webp",
-    images: [                        
-      "/images/empanadas.webp",                                                                                                                                             
-       ], 
-    demoUrl: "https://empanadas.bessondev.com"
+    images: ["/images/empanadas.webp"],
+    demoUrl: "https://empanadas.bessondev.com",
   },
-    {
-    title: "Linsbsay Inventory 📦",  
-    description: "Sistema de inventario para empresas, con control de stock, gestion de productos y reportes en tiempo real. 100% offline.",
+  {
+    title: "Linsbsay Inventory 📦",
+    description:
+      "Sistema de inventario para empresas, con control de stock, gestion de productos y reportes en tiempo real. 100% offline.",
     stack: ["Python", "Flask", "SQLite", "HTML", "CSS", "Bootstrap"],
     link: "https://github.com/bessondev/sistema-inventario",
     image: "/images/linsbsay_login.webp",
-    images: [                                                                        
-         "/images/linsbsay_dash.webp",
-         "/images/linsbsay_listar.webp",
-         "/images/linsbsay_report.webp"                                                                           
-       ], 
-    demoUrl: "https://inventario.bessondev.com"
+    images: [
+      "/images/linsbsay_dash.webp",
+      "/images/linsbsay_listar.webp",
+      "/images/linsbsay_report.webp",
+    ],
+    demoUrl: "https://inventario.bessondev.com",
   },
   {
-    title: "Memorial App 📠",  
-    description: "Plataforma de gestión de funerarias y control de afiliados. Con precios actualizados a tasa dinamica.",
+    title: "Memorial App 📠",
+    description:
+      "Plataforma de gestión de funerarias y control de afiliados. Con precios actualizados a tasa dinamica.",
     stack: ["Next.js", "SQLite", "TailwindCSS", "HTML", "CSS"],
     link: "https://github.com/bessondev/memorial-app",
     image: "/images/memorial_dash_shot.webp",
-    images: [
-      "/images/memorial_pagos.webp",
-       ], 
-    demoUrl: "https://memorial.bessondev.com"
+    images: ["/images/memorial_pagos.webp"],
+    demoUrl: "https://memorial.bessondev.com",
   },
   {
     title: "Hotel Plan 🏨",
-    description: "Plataforma web para la gestión hotelera, control de habitaciones, reportes, movimientos de turno y precios.",
+    description:
+      "Plataforma web para la gestión hotelera, control de habitaciones, reportes, movimientos de turno y precios.",
     stack: ["Node.js", "SQLite", "TailwindCSS", "HTML", "CSS"],
     link: "https://github.com/bessondev/hotel-local-app",
     image: "/images/hotel_dash_shot.webp",
-    images: [                                                                                                                                                                   
-      "/images/hotel_turno.webp",
-       ], 
+    images: ["/images/hotel_turno.webp"],
     // demoUrl: "https://hotelplan.bessondev.com"
   },
   {
     title: "Brillary Shop 🛒",
-    description: "Tienda virtual con integración a whatsapp, modulo de administración y precios actualizados a tasa del dia.",
+    description:
+      "Tienda virtual con integración a whatsapp, modulo de administración y precios actualizados a tasa del dia.",
     stack: ["Astro", "PostgreSQL", "TailwindCSS", "HTML", "CSS", "JavaScript"],
     link: "https://github.com/bessondev/brillary-eccomerce",
     image: "/images/brillary_shot.webp",
-    images: [                                                                                                                                                                      
-       ], 
+    images: [],
     demoUrl: "https://brillaryshop.bessondev.com",
-  }
-];
+  },
 
+  {
+    title: "MusicYa 🎵",
+    description:
+      "App web para descarga de musica gratis, con metadatos de iTunes y Audio de Youtube.",
+    stack: ["TypeScript", "Python", "HTML", "CSS"],
+    link: "https://github.com/bessondev/musicya-app",
+    image: "/images/musicya.webp",
+    images: [],
+    demoUrl: "https://musicya.bessondevproject.com",
+  },
+];
 ---
 
 <Layout>
@@ -80,15 +88,17 @@ const projects = [
 
   <main>
     <!-- 1. Hero: primera impresión -->
-    <Hero name="Harold Besson" title="Arquitecto de Infraestructura & Desarrollador de Software" 
-    pitch="Ingeniero de sistemas con experiencia en gestión estratégica de TI." />  
+    <Hero
+      name="Harold Besson"
+      title="Arquitecto de Infraestructura & Desarrollador de Software"
+      pitch="Ingeniero de sistemas con experiencia en gestión estratégica de TI."
+    />
     <!-- 2. Sobre Mí: contexto personal y diferenciadores -->
 
     <section id="sobre-mi" class="py-12 md:py-16">
       <div class="max-w-5xl mx-auto px-6">
-
         <div class="mb-8 md:mb-10 scroll-reveal">
-            <SobreMi />
+          <SobreMi />
         </div>
       </div>
     </section>
@@ -96,11 +106,19 @@ const projects = [
     <!-- 3. Experiencia: Casos de Éxito -->
     <section id="experiencia" class="py-12 md:py-16">
       <div class="max-w-5xl mx-auto px-6">
-
         <div class="mb-10 scroll-reveal">
-          <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: #3b82f6;">Experiencia</p>
-          <h2 class="text-3xl md:text-4xl font-bold" style="color: #f8fafc;">Casos de Éxito</h2>
-          <p class="mt-3 text-sm" style="color: #64748b;">Click en cada caso para ver el detalle completo.</p>
+          <p
+            class="text-xs font-bold uppercase tracking-widest mb-3"
+            style="color: #3b82f6;"
+          >
+            Experiencia
+          </p>
+          <h2 class="text-3xl md:text-4xl font-bold" style="color: #f8fafc;">
+            Casos de Éxito
+          </h2>
+          <p class="mt-3 text-sm" style="color: #64748b;">
+            Click en cada caso para ver el detalle completo.
+          </p>
         </div>
 
         <!-- Caso 1: Infraestructura -->
@@ -121,7 +139,16 @@ const projects = [
               "Reduccion de un 90% de solicitudes e incidencias sin resolver.",
               "Documentación técnica centralizada y accesible para todo el personal",
             ]}
-            tags={["Linux", "Docker", "GLPI", "Nextcloud", "Redes Estructuradas", "Seguridad Informática", "Virtualización", "Acceso Remoto"]}
+            tags={[
+              "Linux",
+              "Docker",
+              "GLPI",
+              "Nextcloud",
+              "Redes Estructuradas",
+              "Seguridad Informática",
+              "Virtualización",
+              "Acceso Remoto",
+            ]}
             image="/images/diagrama_fcyt.webp"
             gallery={[
               "/images/screen/glpi_dash.webp",
@@ -152,7 +179,6 @@ const projects = [
             ]}
           />
         </div>
-
       </div>
     </section>
 
@@ -160,8 +186,8 @@ const projects = [
     <TechTable />
 
     <!-- 5. Proyectos de Código -->
-    <ProjectsGrid projects={projects} /> 
-    
+    <ProjectsGrid projects={projects} />
+
     <!-- 6. Liderazgo y Mentoría (diferenciador) -->
     <Leadership />
   </main>
