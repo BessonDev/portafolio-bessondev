@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://haroldbesson.dev/sitemap-index.xml
+Sitemap: https://bessondev.com/sitemap-index.xml
