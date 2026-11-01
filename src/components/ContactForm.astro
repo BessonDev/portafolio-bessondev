@@ -1,0 +1,48 @@
+---
+// Simple Contact Form with Formspree endpoint
+// Uses basic HTML form submission (no React needed)
+---
+
+<form 
+  action="https://formspree.io/f/xpppyrlz" 
+  method="POST"
+  class="space-y-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-8 scroll-reveal"
+>
+  <!-- Email Field -->
+  <div class="space-y-2">
+    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">
+      Email <span class="text-blue-500">*</span>
+    </label>
+    <input
+      id="email"
+      type="email"
+      name="email"
+      required
+      class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
+      placeholder="tu@email.com"
+    />
+  </div>
+
+  <!-- Message Field -->
+  <div>
+    <label for="message" class="block text-sm font-medium text-slate-300 mb-2">
+      Mensaje <span class="text-blue-500">*</span>
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows={5}
+      class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 resize-none"
+      placeholder="Hola Harold, me interesa..."
+    ></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <button 
+    type="submit" 
+    class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+  >
+    Enviar Mensaje
+  </button>
+</form>
