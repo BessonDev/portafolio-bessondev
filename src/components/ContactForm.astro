@@ -1,48 +1,91 @@
 ---
-// Simple Contact Form with Formspree endpoint
-// Uses basic HTML form submission (no React needed)
+// Formulario de contacto con categoría y modal personalizado
 ---
 
 <form 
-  action="https://formspree.io/f/xpppyrlz" 
-  method="POST"
+  id="contact-form"
+  onsubmit="handleFormSubmit(event)"
   class="space-y-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700 p-8 scroll-reveal"
 >
-  <!-- Email Field -->
   <div class="space-y-2">
-    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">
-      Email <span class="text-blue-500">*</span>
-    </label>
-    <input
-      id="email"
-      type="email"
-      name="email"
-      required
-      class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200"
-      placeholder="tu@email.com"
-    />
+    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email <span class="text-blue-500">*</span></label>
+    <input id="email" type="email" name="email" required class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200" placeholder="tu@email.com" />
   </div>
 
-  <!-- Message Field -->
+  <div class="space-y-2">
+    <label for="category" class="block text-sm font-medium text-slate-300 mb-2">Categoría <span class="text-blue-500">*</span></label>
+    <select id="category" name="category" required class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 appearance-none cursor-pointer">
+      <option value="">Elige una opción...</option>
+      <option value="pregunta">Pregunta</option>
+      <option value="cotizacion">Cotización</option>
+      <option value="proyecto">Proyecto</option>
+      <option value="consulta">Consulta</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+
   <div>
-    <label for="message" class="block text-sm font-medium text-slate-300 mb-2">
-      Mensaje <span class="text-blue-500">*</span>
-    </label>
-    <textarea
-      id="message"
-      name="message"
-      required
-      rows={5}
-      class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 resize-none"
-      placeholder="Hola Harold, me interesa..."
-    ></textarea>
+    <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Mensaje <span class="text-blue-500">*</span></label>
+    <textarea id="message" name="message" required rows={5} class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-200 resize-none" placeholder="Hola Harold, me interesa..."></textarea>
   </div>
 
-  <!-- Submit Button -->
-  <button 
-    type="submit" 
-    class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
-  >
-    Enviar Mensaje
-  </button>
+  <button id="submit-btn" type="submit" class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2">Enviar Mensaje</button>
 </form>
+
+<script is:inline>
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Enviando...';
+    
+    try {
+      const formData = new FormData(e.target);
+      const resp = await fetch('https://formspree.io/f/xpppyrlz', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      
+      if (resp.ok) {
+        document.getElementById('modal-success').classList.remove('hidden');
+        document.getElementById('modal-success').classList.add('flex');
+        e.target.reset();
+      } else {
+        throw new Error('Submit failed');
+      }
+    } catch (err) {
+      document.getElementById('modal-error').classList.remove('hidden');
+      document.getElementById('modal-error').classList.add('flex');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = 'Enviar Mensaje';
+    }
+  }
+</script>
+
+<!-- Modal Éxito -->
+<div id="modal-success" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/60 backdrop-blur-sm p-4" onclick="this.classList.add('hidden'); this.classList.remove('flex');">
+  <div onclick="event.stopPropagation()" class="bg-slate-900 border border-emerald-500/30 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl shadow-emerald-900/20">
+    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-500/10 flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <h3 class="text-2xl font-bold text-white mb-2">¡Gracias!</h3>
+    <p class="text-slate-300">Tu mensaje ha sido enviado exitosamente.</p>
+    <p class="text-sm text-slate-400 mt-2">Te contactaremos a la brevedad para ayudarte.</p>
+    <button onclick="document.getElementById('modal-success').classList.add('hidden'); document.getElementById('modal-success').classList.remove('flex');" class="mt-6 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">Entendido</button>
+  </div>
+</div>
+
+<!-- Modal Error -->
+<div id="modal-error" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/60 backdrop-blur-sm p-4" onclick="this.classList.add('hidden'); this.classList.remove('flex');">
+  <div onclick="event.stopPropagation()" class="bg-slate-900 border border-red-500/30 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl shadow-red-900/20">
+    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-500/10 flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    </div>
+    <h3 class="text-2xl font-bold text-white mb-2">Lo que hiciste no funcionó</h3>
+    <p class="text-slate-300">Hubo un error al enviar tu mensaje.</p>
+    <p class="text-sm text-slate-400 mt-2">Intenta de nuevo más tarde o revisa tu conexión.</p>
+    <button onclick="document.getElementById('modal-error').classList.add('hidden'); document.getElementById('modal-error').classList.remove('flex');" class="mt-6 px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-medium transition-colors">Entendido</button>
+  </div>
+</div>
